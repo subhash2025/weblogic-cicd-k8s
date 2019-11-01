@@ -8,14 +8,15 @@ pipeline {
     }
 
     environment {
-        WLSIMG_BLDDIR = "${env.WORKSPACE}/imagetool/target/build"
-        WLSIMG_CACHEDIR = "${env.WORKSPACE}/imagetool/target/cache"
+        WLSIMG_BLDDIR = "${env.WORKSPACE}/resources/build
+        WLSIMG_CACHEDIR = "${env.WORKSPACE}/resources/cache
     }
 
     stages {
         stage ('Environment') {
             steps {
                 sh '''
+                    mkdir -p ${env.WORKSPACE}/resources/cache ${env.WORKSPACE}/resources/build
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     echo "JAVA_HOME = ${JAVA_HOME}"
@@ -32,7 +33,7 @@ pipeline {
                     chmod +x imagetool/bin/*
                     ls -l imagetool/bin/*
                     imagetool/bin/setup.sh
-                    imagetool/bin/imagetool.sh  --V
+                    imagetool/bin/imagetool.sh -V
                 '''
             }
         }
