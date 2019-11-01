@@ -16,7 +16,7 @@ pipeline {
         stage ('Environment') {
             steps {
                 sh '''
-                    mkdir -p ${env.WORKSPACE}/resources/cache ${env.WORKSPACE}/resources/build
+                    mkdir -p  ${WLSIMG_BLDDIR} ${WLSIMG_CACHE_DIR}
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     echo "JAVA_HOME = ${JAVA_HOME}"
