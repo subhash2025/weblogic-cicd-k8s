@@ -27,7 +27,9 @@ pipeline {
         stage ('Build') {
             steps {
                 sh '''
-                    curl -SLO  https://github.com/oracle/weblogic-image-tool/releases/download/release-1.6.0/imagetool.zip
+                    curl --silent "https://api.github.com/repos/oracle/weblogic-image-tool/releases/latest" |
+                    grep '"tag_name":' |sed -E 's/.*"([^"]+)".*/\1/' | 
+                    xargs -I {} curl -sOL "https://github.com/oracle/weblogic-image-tool/releases/download/"{}'/imagetool.zip'
                     jar xvf imagetool.zip
                     chmod +x imagetool/bin/*
                     ls -l imagetool/bin/*
