@@ -4,7 +4,7 @@ pipeline {
     }
     agent any
     tools {
-        jdk 'jdk8'
+        jdk 'jdk11'
     }
 
     environment {
@@ -19,6 +19,8 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     echo "JAVA_HOME = ${JAVA_HOME}"
+                    echo "IT Build DIR= ${WLSIMG_BLDDIR}
+                    echo "IT Cache DIR= ${WLSIMG_CACHEDIR}
                 '''
             }
         }
