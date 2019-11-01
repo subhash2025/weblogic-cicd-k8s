@@ -10,6 +10,7 @@ pipeline {
     environment {
         WLSIMG_BLDDIR = "${env.WORKSPACE}/resources/build"
         WLSIMG_CACHEDIR = "${env.WORKSPACE}/resources/cache"
+        IMAGE_TAG = "phx.ocir.io/weblogick8s/onprem-domain-image:2.0"
     }
 
     stages {
@@ -23,7 +24,7 @@ pipeline {
                 '''
             }
         }
-        stage ('Build') {
+        stage ('Build Image') {
             steps {
                 sh '''
                     curl -SLO  https://github.com/oracle/weblogic-image-tool/releases/download/release-1.6.0/imagetool.zip
@@ -31,9 +32,16 @@ pipeline {
                     chmod +x imagetool/bin/*
                     rm -rf ${WLSIMG_CACHEDIR}
                     imagetool/bin/imagetool.sh cache addInstaller --type wdt --path /scratch/artifacts/imagetool/weblogic-deploy.zip --version 1.1.1
-                    imagetool/bin/imagetool.sh cache addInstaller --type wls --path /scratch/artifacts/imagetool/fmw_12.2.1.3.0_wls_Disk1_1of1.zip --version 12.2.1.3.0
+                    imagetool/bin/imagetool.sh cache addInstaller --type wls --path /scratch/artifacts/imagetool/fmw_12.2.1.4.0_wls_Disk1_1of1.zip --version 12.2.1.4.0
                     imagetool/bin/imagetool.sh cache addInstaller --type jdk --path /scratch/artifacts/imagetool/jdk-8u212-linux-x64.tar.gz --version 8u212
-                    imagetool/bin/imagetool.sh create --tag phx.ocir.io/weblogick8s/onprem-domain-image:1.0 --version 12.2.1.3.0 --jdkVersion=8u212 --wdtArchive=./DiscoveredDemoDomain.zip --wdtModel=./DiscoverDomain-v1.yaml --wdtDomainHome=/u01/oracle/user_projects/domains/onprem-domain --wdtVariables=./domain.properties --wdtVersion=1.1.1
+                    imagetool/bin/imagetool.sh create --tag ${IMAGE_TAG} --version 12.2.1.4.0 --jdkVersion=8u212 --wdtArchive=./DiscoveredDemoDomain.zip --wdtModel=./DiscoverDomain-v1.yaml --wdtDomainHome=/u01/oracle/user_projects/domains/onprem-domain --wdtVariables=./domain.properties --wdtVersion=1.1.1
+                '''
+            }
+        }
+        stage ('Push Image') {
+            steps {
+                sh '''
+                    docker push ${IMAGE_TAG}
                 '''
             }
         }
