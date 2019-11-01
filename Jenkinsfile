@@ -32,7 +32,7 @@ pipeline {
                     imagetool/bin/setup.sh
                     imagetool/bin/imagetool.sh cache addInstaller --type wdt --path /scratch/artifacts/imagetool/weblogic-deploy.zip --version 1.1.1
                     imagetool/bin/imagetool.sh cache addInstaller --type wls --path /scratch/artifacts/imagetool/fmw_12.2.1.3.0_wls_Disk1_1of1.zip --version 12.2.1.3.0
-                    imagetool/bin/imagetool.sh cache addInstaller --type jdk --path /scratch/artifacts/imagetool/jdk-8u201-linux-i586.tar.gz --version 8u201 
+                    imagetool/bin/imagetool.sh cache addInstaller --type jdk --path /scratch/artifacts/imagetool/jdk-8u212-linux-x64.tar.gz --version 8u212 
                     imagetool/bin/imagetool.sh cache listItems 
                 '''
             }
