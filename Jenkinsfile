@@ -8,8 +8,8 @@ pipeline {
     }
 
     environment {
-        WLSIMG_BLDDIR = "${env.WORKSPACE}/resources/build
-        WLSIMG_CACHEDIR = "${env.WORKSPACE}/resources/cache
+        WLSIMG_BLDDIR = "${env.WORKSPACE}/resources/build"
+        WLSIMG_CACHEDIR = "${env.WORKSPACE}/resources/cache"
     }
 
     stages {
@@ -20,8 +20,8 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     echo "JAVA_HOME = ${JAVA_HOME}"
-                    echo "IT Build DIR= ${WLSIMG_BLDDIR}
-                    echo "IT Cache DIR= ${WLSIMG_CACHEDIR}
+                    echo "IT Build DIR= ${WLSIMG_BLDDIR}"
+                    echo "IT Cache DIR= ${WLSIMG_CACHEDIR}"
                 '''
             }
         }
