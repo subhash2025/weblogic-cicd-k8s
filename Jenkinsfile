@@ -49,6 +49,7 @@ pipeline {
         stage ('Roll Change') {
             steps {
                 sh '''
+                    ls domain.yaml
                     kubectl apply -f ./domain.yaml
                 '''
             }
