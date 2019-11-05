@@ -42,6 +42,14 @@ pipeline {
             steps {
                 sh '''
                     docker push ${IMAGE_TAG}
+                    docker rmi ${IMAGE_TAG} 
+                '''
+            }
+        }
+        stage ('Roll Change') {
+            steps {
+                sh '''
+                    kubectl apply -f ./domain.yaml
                 '''
             }
         }
