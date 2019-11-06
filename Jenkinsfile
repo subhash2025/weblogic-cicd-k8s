@@ -53,5 +53,31 @@ pipeline {
                 '''
             }
         }
-     }
+       stage('List pods') {
+withKubeConfig(caCertificate: '''-----BEGIN CERTIFICATE-----
+MIIDjDCCAnSgAwIBAgIUQNdaHQuKwqO6Hmd4i4UsE/AY31UwDQYJKoZIhvcNAQEL
+BQAwXjELMAkGA1UEBhMCVVMxDjAMBgNVBAgTBVRleGFzMQ8wDQYDVQQHEwZBdXN0
+aW4xDzANBgNVBAoTBk9yYWNsZTEMMAoGA1UECxMDT0RYMQ8wDQYDVQQDEwZLOFMg
+Q0EwHhcNMTgxMjEwMTY1OTAwWhcNMjMxMjA5MTY1OTAwWjBeMQswCQYDVQQGEwJV
+UzEOMAwGA1UECBMFVGV4YXMxDzANBgNVBAcTBkF1c3RpbjEPMA0GA1UEChMGT3Jh
+Y2xlMQwwCgYDVQQLEwNPRFgxDzANBgNVBAMTBks4UyBDQTCCASIwDQYJKoZIhvcN
+AQEBBQADggEPADCCAQoCggEBAKNLLFnWeV7nWkTAqyLJlvSSdcHrhkoJgLGXQ/d/
+bV5udGmM2DomsC8bR0chXYTZWjC9T0x+wJrBQWQR6yFYxXViybctTQZBbkJAtaUb
+znFQ3HxUAPNZtsnLkMEDDPdz5PKk6wPvXjQ0knldZZSIx36IH7zMdIUrwnySm+51
+WZkEoKol5uVy8nAATh8UFDrxlqIBpuCu8pLO/l/HxhFCbzvsMwog+9O5fwRNKOeh
+FPqzoD6LEUP9VJa3b2FhRIG+3DE7Dr+1Exsdl+BnqOr6IEDQQ9ySX+78ZmPkUJ36
+p/cpNXROz+DhTSqJ1pNozRuNNF/5uh7CnnJM1enovZDGJgUCAwEAAaNCMEAwDgYD
+VR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFBYul9DjPHOk
+gsko6ei+38OUEcurMA0GCSqGSIb3DQEBCwUAA4IBAQAhluOif7Ogm0ntXIH5VWr2
+oHgyy2raOOVT3140jyKK/x1188f4vd2MXORPxpmDAyh6ZEm7xfphXHnCPudMXsK8
+IGyuOGc2eH9RsleeS+VFYYxWOibWtZHtvln0LV5numubln/smf8rK0KP6e1mCYa9
+AkOh1+gBLrUirlIJapWROwD1iUEEDBm5OW4fiVHvvResEsBrrx1vF8QvM8rIpG2d
+Dl5LQ82MG1CtYErwJELAo4A6bYeFd+fgvz5cRlovkP9P9PIwqytCmGLdxG7d+v+i
+7buDX85U50L73IkcpxjMEOxy8nPoBjRfEjLmvAivO/RBKWo4DBBFWieEE7+Fhj/M
+-----END CERTIFICATE-----''', clusterName: 'cluster-czdmztemm3g', contextName: 'context-czdmztemm3g', credentialsId: 'mgr-kubeconfig-secret', namespace: 'onprem-domain-ns', serverUrl: 'https://czdmztemm3g.us-phoenix-1.clusters.oci.oraclecloud.com:6443') {
+    // some block
+      sh 'kubectl get pods'
+    }
+  }
+ }
 }
