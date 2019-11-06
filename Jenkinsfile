@@ -50,7 +50,6 @@ pipeline {
             steps {
                 sh '''
                     ls domain.yaml
-                    kubectl apply -f ./domain.yaml
                 '''
             }
         }
