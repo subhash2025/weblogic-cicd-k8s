@@ -50,7 +50,7 @@ pipeline {
             steps {
                 sh '''
                     export KUBECONFIG=/scratch/k8s-demo/mrcluster_kubeconfig
-                    kubectl get ns
+                    ls ./domain.yaml
                     kubectl apply -f ./domain.yaml
                     kubectl get po -n onprem-domain-ns
                 '''
