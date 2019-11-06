@@ -46,18 +46,13 @@ pipeline {
                 '''
             }
         }
-        stage ('Roll Change') {
-            steps {
-                sh '''
-                    ls domain.yaml
-                '''
-            }
-        }
-        stage('List pods') {
+        stage('Roll Updates') {
             steps {
                 sh '''
                     export KUBECONFIG=/scratch/k8s-demo/mrcluster_kubeconfig
                     kubectl get ns
+                    kubectl apply -f ./domain.yaml
+                    kubectl get po -n onprem-domain-ns
                 '''
             }
      }
