@@ -53,7 +53,9 @@ pipeline {
                 '''
             }
         }
-       stage('List pods') {
+   }
+   node {    
+     stage('List pods') {
          withKubeConfig(caCertificate: '''-----BEGIN CERTIFICATE-----
          MIIDjDCCAnSgAwIBAgIUQNdaHQuKwqO6Hmd4i4UsE/AY31UwDQYJKoZIhvcNAQEL
          BQAwXjELMAkGA1UEBhMCVVMxDjAMBgNVBAgTBVRleGFzMQ8wDQYDVQQHEwZBdXN0
@@ -84,5 +86,5 @@ pipeline {
          sh 'kubectl get pods'
          }
      }
-   }
+  }
 }
