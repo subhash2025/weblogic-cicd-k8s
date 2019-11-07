@@ -1,7 +1,6 @@
 # Copyright 2017, 2019, Oracle Corporation and/or its affiliates. All rights reserved.
 
 # Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl.
-#
 # This is an example of how to define a Domain resource.  Please read through the comments which explain
 # what updates are needed.
 #
@@ -106,7 +105,7 @@ spec:
   clusters:
   - clusterName: cluster-1
     serverStartState: "RUNNING"
-    replicas: 2
+    replicas: 3
 
   # The number of managed servers to start for any unlisted clusters
   # replicas: 1
