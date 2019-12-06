@@ -49,7 +49,7 @@ pipeline {
         stage('Roll Updates') {
             steps {
                 sh '''
-                    export KUBECONFIG=/scratch/k8s-demo/mrcluster_kubeconfig
+                    export KUBECONFIG=/home/opc/.kube/config
                     ls ./domain.yaml
                     kubectl create secret generic onprem-domain-weblogic-credentials --from-literal=username=weblogic --from-literal=password=welcome1 -n onprem-domain-ns
                     kubectl apply -f ./domain.yaml
