@@ -50,7 +50,7 @@ pipeline {
             steps {
                 sh '''
                     export KUBECONFIG=/home/opc/.kube/config
-                    who am i
+                    ls -l $KUBECONFIG
                     ls ./domain.yaml
                     kubectl create secret generic onprem-domain-weblogic-credentials --from-literal=username=weblogic --from-literal=password=welcome1 -n onprem-domain-ns
                     kubectl apply -f ./domain.yaml
