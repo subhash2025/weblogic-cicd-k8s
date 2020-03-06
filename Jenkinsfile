@@ -31,11 +31,11 @@ pipeline {
                     curl -SLO  https://github.com/oracle/weblogic-image-tool/releases/download/release-1.8.1/imagetool.zip
                     curl -SLO  https://github.com/oracle/weblogic-deploy-tooling/releases/download/release-1.7.1/weblogic-deploy.zip
                     ls *
-                    cp weblogic-deploy.zip /scratch/artifacts/wdt
+                    cp weblogic-deploy.zip /scratch/artifacts/imagetool
                     jar xvf imagetool.zip
                     chmod +x imagetool/bin/*
                     rm -rf ${WLSIMG_CACHEDIR}
-                    imagetool/bin/imagetool.sh cache addInstaller --type wdt --path /scratch/artifacts/wdt/weblogic-deploy.zip --version 1.7.1
+                    imagetool/bin/imagetool.sh cache addInstaller --type wdt --path /scratch/artifacts/imagetool/weblogic-deploy.zip --version 1.7.1
                     imagetool/bin/imagetool.sh cache addInstaller --type wls --path /scratch/artifacts/imagetool/fmw_12.2.1.4.0_wls_Disk1_1of1.zip --version 12.2.1.4.0
                     imagetool/bin/imagetool.sh cache addInstaller --type jdk --path /scratch/artifacts/imagetool/jdk-8u212-linux-x64.tar.gz --version 8u212
                     imagetool/bin/imagetool.sh create --tag ${IMAGE_TAG} --version 12.2.1.4.0 --jdkVersion=8u212 --wdtArchive=./DiscoveredDemoDomain.zip --wdtModel=./DiscoverDomain-v1.yaml --wdtDomainHome=/u01/oracle/user_projects/domains/onprem-domain --wdtVariables=./domain.properties --wdtVersion=1.7.1
