@@ -25,7 +25,7 @@ spec:
   domainHomeInImage: true
 
   # Update this with the name of the Docker image that will be used to run your domain:
-  image: "phx.ocir.io/weblogick8s/onprem-domain-image:2.0" 
+  image: "phx.ocir.io/weblogick8s/onprem-domain-image:1" 
   # image: "iad.ocir.io/weblogick8s/weblogic-operator-tutorial-store:1.0"
 
   # imagePullPolicy defaults to "Always" if image version is :latest
