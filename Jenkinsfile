@@ -29,8 +29,8 @@ pipeline {
             steps {
                 sh '''
                     curl -SLO  https://github.com/oracle/weblogic-image-tool/releases/download/release-1.8.1/imagetool.zip
-                    curl -SLO  https://github.com/oracle/weblogic-deploy-tooling/releases/download/release-1.7.1/weblogic-deploy.zip
                     ls *
+                    chmod +w /scratch/artifacts/imagetool
                     cp weblogic-deploy.zip /scratch/artifacts/imagetool
                     jar xvf imagetool.zip
                     chmod +x imagetool/bin/*
