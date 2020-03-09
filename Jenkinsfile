@@ -60,10 +60,10 @@ pipeline {
                 '''
            }
       }
+   }
    post {
     cleanup {
         deleteDir() /* clean up the workspace */
     }
   }
-}
 }
