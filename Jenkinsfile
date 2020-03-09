@@ -55,7 +55,7 @@ pipeline {
                     export PATH=/var/lib/jenkins/bin:$PATH
                     kubectl get nodes
                     ls ./domain.yaml
-                    kubectl patch domain onprem-domain -n onprem-domain-ns --type='json' -p='[{"op": "replace", "path": "/spec/image", "value": "${IMAGE_TAG}" }]'
+                    kubectl apply -f ./domain.yaml
                     kubectl get po -n onprem-domain-ns
                 '''
            }
