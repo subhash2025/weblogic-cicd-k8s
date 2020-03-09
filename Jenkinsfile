@@ -29,9 +29,9 @@ pipeline {
             steps {
                 sh '''
                     curl -SLO  https://github.com/oracle/weblogic-image-tool/releases/download/release-1.8.1/imagetool.zip
-                    jar xvf imagetool.zip
-                    chmod +x imagetool/bin/*
+                    unzip -o ./imagetool.zip
                     rm -rf ${WLSIMG_CACHEDIR}
+                    docker images
                     imagetool/bin/imagetool.sh cache addInstaller --type wdt --path /scratch/artifacts/imagetool/weblogic-deploy.zip --version 1.1.1
                     imagetool/bin/imagetool.sh cache addInstaller --type wls --path /scratch/artifacts/imagetool/fmw_12.2.1.4.0_wls_Disk1_1of1.zip --version 12.2.1.4.0
                     imagetool/bin/imagetool.sh cache addInstaller --type jdk --path /scratch/artifacts/imagetool/jdk-8u212-linux-x64.tar.gz --version 8u212
@@ -42,7 +42,6 @@ pipeline {
         stage ('Push Image') {
             steps {
                 sh '''
-                    docker login phx.ocir.io -u="weblogick8s/monica.riccelli@oracle.com" -p="WebLogic!PM1"
                     docker push ${IMAGE_TAG}
                 '''
             }
@@ -56,11 +55,15 @@ pipeline {
                     export PATH=/var/lib/jenkins/bin:$PATH
                     kubectl get nodes
                     ls ./domain.yaml
-                    kubectl create secret generic onprem-domain-weblogic-credentials --from-literal=username=weblogic --from-literal=password=welcome1 -n onprem-domain-ns
-                    kubectl apply -f ./domain.yaml
+                    kubectl patch domain onprem-domain -n onprem-domain-ns --type='json' -p='[{"op": "replace", "path": "/spec/image", "value": "${IMAGE_TAG}" }]'
                     kubectl get po -n onprem-domain-ns
                 '''
-            }
-     }
+           }
+      }
+   post {
+    cleanup {
+        deleteDir() /* clean up the workspace */
+    }
   }
+}
 }
