@@ -1,13 +1,15 @@
 domainInfo:
-    AdminPassword: '@@PROP:WLS_PWD@@'
+    AdminUserName: '@@PROP:AdminUserName@@'
+    AdminPassword: '@@PROP:AdminPassword@@'
 topology:
-    Name: 'onprem-domain'
+    Name: onprem_domain
     AdminServerName: 'admin-server'
     Cluster:
         cluster_1:
             DynamicServers:
                 ServerNamePrefix: 'managed-server'
                 CalculatedListenPorts: false
+                MachineMatchType: name
                 MaximumDynamicServerCount: 5
                 ServerTemplate: 'server-template_1'
                 DynamicClusterSize: 5
@@ -24,7 +26,7 @@ topology:
     Machine:
         machine_1:
     SecurityConfiguration:
-        CredentialEncrypted: '@@PROP:WLS_PWD@@'
+        CredentialEncrypted: '@@PROP:SecurityConfig.CredentialEncrypted@@'
         Realm:
             myrealm:
                 Adjudicator:
@@ -56,7 +58,6 @@ resources:
     JDBCSystemResource:
         testDatasource:
             Target: cluster_1
-            DescriptorFileName: 'jdbc/testDatasource-3399-jdbc.xml'
             JdbcResource:
                 DatasourceType: GENERIC
                 JDBCConnectionPoolParams:
@@ -87,7 +88,7 @@ resources:
                     JNDIName: jdbc/testDatasource
                 JDBCDriverParams:
                     URL: 'jdbc:oracle:thin:@//xxx.xxx.x.xxx:1521/ORCLCDB'
-                    PasswordEncrypted: '@@PROP:DB_PWD@@'
+                    PasswordEncrypted: '@@PROP:JDBC.testDatasource.PasswordEncrypted@@'
                     DriverName: oracle.jdbc.OracleDriver
                     Properties:
                         user:
@@ -97,4 +98,4 @@ appDeployments:
         opdemo:
             SourcePath: wlsdeploy/applications/opdemo.war
             ModuleType: war
-            Target: cluster_1
+            Target: 'cluster_1'
