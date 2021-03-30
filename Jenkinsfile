@@ -30,6 +30,7 @@ pipeline {
                 sh '''
                     pwd
                     whoami
+                    rm -rf *
                     cp -R /var/lib/jenkins/backup/* .
                     ls -lrat
                     curl -SLO  https://github.com/oracle/weblogic-image-tool/releases/download/release-1.8.1/imagetool.zip
