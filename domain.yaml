@@ -23,9 +23,6 @@ spec:
 
   imagePullPolicy: "Always"
 
-  imagePullSecrets:
-  - name: ocirsecret
-
   webLogicCredentialsSecret:
     name: onprem-domain-weblogic-credentials
 
