@@ -56,7 +56,7 @@ pipeline {
         stage('Roll Updates') {
             steps {
                 sh '''
-                    sed -i 's#{{docker_image}}#${IMAGE_NAME}#g' domain.yaml
+                    sed -i s#{{docker_image}}#${IMAGE_NAME}#g domain.yaml
                     cat domain.yaml
                     #export KUBECONFIG=/scratch/k8s-demo/mrcluster_kubeconfig
                     #export PATH=/var/lib/jenkins/bin:$PATH
