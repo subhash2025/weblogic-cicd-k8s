@@ -28,6 +28,8 @@ pipeline {
         stage ('Build Image') {
             steps {
                 sh '''
+                    pwd
+                    whoami
                     curl -SLO  https://github.com/oracle/weblogic-image-tool/releases/download/release-1.8.1/imagetool.zip
                     unzip -o ./imagetool.zip
                     rm -rf ${WLSIMG_CACHEDIR}
