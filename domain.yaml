@@ -36,8 +36,8 @@ spec:
     - name: USER_MEM_ARGS
       value: "-Xms64m -Xmx256m "
 
-    nodeSelector:
-      use-for-weblogic: true
+      #nodeSelector:
+      #use-for-weblogic: true
 
   # adminServer is used to configure the desired behavior for starting the administration server.
   adminServer:
