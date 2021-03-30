@@ -10,7 +10,7 @@ pipeline {
     environment {
         WLSIMG_BLDDIR = "${env.WORKSPACE}/resources/build"
         WLSIMG_CACHEDIR = "${env.WORKSPACE}/resources/cache"
-        IMAGE_NAME = "phx.ocir.io/weblogick8s/onprem-domain-image:1"
+        IMAGE_NAME = "customimage2021/onprem-domain-image:1"
     }
 
     stages {
@@ -46,17 +46,16 @@ pipeline {
         stage ('Push Image') {
             steps {
                 sh '''
-                    //docker push ${IMAGE_NAME}
-                    exit 1
+                    docker push ${IMAGE_NAME}
                 '''
             }
         }
         stage('Roll Updates') {
             steps {
                 sh '''
+                    sed -i 's#{{docker_image}}#${IMAGE_NAME}#g' domain.yaml
+                    cat domain.yaml
                     export KUBECONFIG=/scratch/k8s-demo/mrcluster_kubeconfig
-                    export OCI_CLI_PROFILE=MONICA
-                    export OCI_CONFIG_FILE=/var/lib/jenkins/.oci/config
                     export PATH=/var/lib/jenkins/bin:$PATH
                     kubectl apply -f ./domain.yaml
                 '''

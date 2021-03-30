@@ -19,7 +19,7 @@ spec:
 
   domainHomeInImage: true
 
-  image: "phx.ocir.io/weblogick8s/onprem-domain-image:1" 
+  image: {{docker_image}}
 
   imagePullPolicy: "Always"
 
