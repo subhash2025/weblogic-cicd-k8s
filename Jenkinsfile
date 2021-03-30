@@ -1,3 +1,4 @@
+
 pipeline {
     options {
         disableConcurrentBuilds()
@@ -61,7 +62,7 @@ pipeline {
                     aws eks --region us-east-1 update-kubeconfig --name eks-tools-cicd
                     #export KUBECONFIG=/scratch/k8s-demo/mrcluster_kubeconfig
                     #export PATH=/var/lib/jenkins/bin:$PATH
-                    kubectl apply -f ./domain.yaml
+                    #kubectl apply -f ./domain.yaml
                 '''
            }
       }
